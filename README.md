@@ -1,6 +1,6 @@
 # 🔗 Blockchain Audit Dashboard
 
-A secure and tamper-proof transaction monitoring system built using DBMS concepts and blockchain-inspired architecture. This project demonstrates how backend systems can ensure data integrity, traceability, and transparency using audit chains.
+A DBMS-based Blockchain-Inspired Audit System designed to ensure **data integrity, transparency, and tamper-resistant transaction tracking**.
 
 🌐 Live Demo: https://dbms-project-2.vercel.app/dashboard
 
@@ -8,130 +8,116 @@ A secure and tamper-proof transaction monitoring system built using DBMS concept
 
 ## 📌 Overview
 
-This project was developed as part of an academic DBMS initiative with the goal of exploring how backend systems work beyond traditional command-line outputs.
+This project was built as part of an academic DBMS project with the goal of going beyond traditional database systems.
 
-We were curious about:
-- How frontend connects to backend
-- How databases handle secure transactions
-- How blockchain concepts can be simulated in DBMS
+Instead of just storing data, we explored:
+- How **blockchain-like audit systems** work
+- How **backend logic integrates with frontend dashboards**
+- How to enforce **data immutability inside a database**
 
-So we built a **Blockchain Audit System** with a **real dashboard interface**.
-
----
-
-## 🚀 Features
-
-- 🔐 **Tamper-proof audit logs**
-- 🔗 **Blockchain-like structure using hash chaining**
-- 💰 **Wallet-based transaction system**
-- 📊 **Interactive dashboard UI**
-- ⚡ **Real-time transaction updates**
-- 🛡️ **Trigger-based protection against unauthorized modifications**
+The system simulates a blockchain by storing transactions in **linked audit blocks**, making unauthorized changes detectable.
 
 ---
 
-## 🧠 Core Concepts Used
+## ✨ Features
 
-### 🗄️ DBMS
-- Tables: `wallets`, `transactions`, `audit_blocks`
-- Triggers & Functions (PL/pgSQL)
-- Data integrity constraints
-- Transaction management
-
-### 🔗 Blockchain Concepts
-- Hash chaining between blocks
-- Immutable audit trail
-- Block verification system
-
-### 🌐 Full Stack Integration
-- Backend connected to frontend dashboard
-- API-based communication
-- Deployment using Vercel
+- 🔐 Tamper-resistant audit trail using chained blocks  
+- 💸 Wallet system with balance tracking  
+- 🔄 Transaction system with validation  
+- 🧱 Audit blocks storing transaction history  
+- ⚡ Real-time dashboard UI  
+- 🚫 Restricted modification using database functions  
+- 📊 Clean visualization of data  
 
 ---
 
-## 🏗️ System Architecture
+## 🧠 Core Concept
+
+Unlike real blockchain systems, this project implements a **database-level blockchain simulation**.
+
+Each block contains:
+- Transaction data  
+- Previous block hash  
+- Current block hash  
+
+This creates a chain:
+
+Block 1 → Block 2 → Block 3 → Block N  
+
+If any data is modified:
+- The chain breaks  
+- Integrity verification fails  
 
 ---
 
-## 🧾 Database Schema
+## 🛠️ Tech Stack
 
-### Wallets Table
-- Stores user balances
+### Frontend
+- React.js  
+- Custom dark UI  
+- Deployed on Vercel  
 
-### Transactions Table
-- Records money transfers
+### Backend / DBMS
+- PostgreSQL  
+- PL/pgSQL  
+- Triggers & Stored Procedures  
 
-### Audit Blocks Table
-- Stores hashed transaction logs
-- Links each block to previous block (chain)
+### Concepts Used
+- Database triggers  
+- Transaction management  
+- Hash chaining  
+- Data integrity enforcement  
+
+---
+
+## 📂 Database Structure
+
+### Tables
+
+- **wallets** → stores balances  
+- **transactions** → records transfers  
+- **audit_blocks** → stores blockchain-like chain  
 
 ---
 
 ## ⚙️ Key Functions
 
-### 🔁 `transfer_funds()`
-- Transfers money between wallets
-- Automatically logs transaction
-- Creates audit block
+### create_wallet()
+Creates a wallet with initial balance  
 
-### ⛓️ `insert_audit_block()`
-- Generates hash
-- Links with previous block
-- Stores immutable record
+### transfer_funds()
+- Validates balance  
+- Executes transfer  
+- Logs transaction  
 
-### 🔍 `verify_audit_chain()`
-- Checks integrity of entire blockchain
-- Detects tampering
+### insert_audit_block()
+- Creates new block  
+- Links with previous hash  
+- Stores snapshot  
 
----
+### verify_audit_chain()
+- Checks full chain integrity  
+- Detects tampering  
 
-## 🛡️ Security Features
-
-- ❌ Direct modification of critical tables restricted
-- ⚠️ Triggers block unauthorized updates
-- 🔐 Audit chain ensures data cannot be altered silently
-
----
-
-## 💡 What We Learned
-
-- How backend systems actually work beyond theory
-- Real-world use of DBMS triggers and functions
-- Integrating frontend with backend systems
-- Practical implementation of blockchain concepts without crypto
+### Security Logic
+- Prevents direct modification  
+- Forces controlled operations  
 
 ---
 
-## 🎯 Motivation
+## 🚀 Getting Started
 
-This project was not just for grades.
+### Prerequisites
 
-We built it because:
-> We wanted to understand how real systems work — not just print outputs on a terminal.
-
----
-
-## 🧑‍💻 Tech Stack
-
-- PostgreSQL (DBMS)
-- PL/pgSQL (Functions & Triggers)
-- JavaScript (Frontend)
-- Vercel (Deployment)
+- Node.js  
+- PostgreSQL  
+- Git  
 
 ---
 
-## 📸 Screenshots
+### Installation
 
-_Add your dashboard screenshots here_
-
----
-
-## 🔧 How to Run Locally
-
-1. Clone the repo
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
--- create tables
--- create functions
--- setup triggers
+git clone https://github.com/your-username/dbms-blockchain-audit.git
+cd dbms-blockchain-audit
+npm install
