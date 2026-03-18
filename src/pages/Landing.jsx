@@ -37,7 +37,7 @@ export function Landing() {
         <Box sx={{ textAlign: 'center', mb: 4 }}>
           <img src="/logo.svg" alt="Blockchain Logo" style={{ height: 48, marginBottom: 24 }} />
           <Typography variant="h1" gutterBottom>
-            Audit Dashboard
+            TrustLedger
           </Typography>
           <Typography variant="body1" sx={{ color: 'var(--accent)' }}>
             A tamper-evident audit ledger. Create transactions, explore blocks, verify integrity.
