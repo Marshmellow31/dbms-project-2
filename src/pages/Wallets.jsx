@@ -9,6 +9,7 @@ export function Wallets() {
   
   const [name, setName] = useState('');
   const [balance, setBalance] = useState('');
+  const [password, setPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [toast, setToast] = useState(null);
 
@@ -29,9 +30,10 @@ export function Wallets() {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const { data, error } = await supabase.rpc('create_wallet', {
+      const { error } = await supabase.rpc('create_wallet', {
         p_name: name,
         p_balance: parseFloat(balance) || 0,
+        p_password: password,
         p_metadata: { source: 'ui' }
       });
 
@@ -40,6 +42,7 @@ export function Wallets() {
       setToast({ variant: 'success', message: `Wallet created successfully!` });
       setName('');
       setBalance('');
+      setPassword('');
       fetchWallets();
     } catch (err) {
       setToast({ variant: 'error', message: err.message });
@@ -127,6 +130,14 @@ export function Wallets() {
                     value={balance}
                     onChange={e => setBalance(e.target.value)}
                     placeholder="0.00"
+                  />
+                  <TextField 
+                    label="Password" 
+                    type="password"
+                    required 
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    placeholder="Enter wallet password"
                   />
                   <Button 
                     type="submit" 
