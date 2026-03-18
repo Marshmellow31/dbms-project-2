@@ -4,7 +4,7 @@ FROM node:18-alpine AS build
 WORKDIR /app
 # Copy package files separately to leverage Docker cache
 COPY package*.json ./
-RUN npm install
+RUN npm install --include=dev
 
 # Copy all project files and build
 COPY . .
