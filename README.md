@@ -1,62 +1,137 @@
-# Blockchain Audit Dashboard
+# 🔗 Blockchain Audit Dashboard
 
-A tamper-evident audit ledger built with React, Vite, MUI, and Supabase.
+A secure and tamper-proof transaction monitoring system built using DBMS concepts and blockchain-inspired architecture. This project demonstrates how backend systems can ensure data integrity, traceability, and transparency using audit chains.
 
-## Features
-- **Immutable Log**: Every transaction logged via the backend creates an immutable block.
-- **Chain Verification**: Verify the entire chain's integrity locally or against the Supabase DB.
-- **Block Explorer**: Visualizes the chain of blocks linking cryptographic hashes.
-- **Exporting/Anchoring**: Export the latest root hash for anchoring the chain state.
+🌐 Live Demo: https://dbms-project-2.vercel.app/dashboard
 
-## Getting Started
+---
 
-### Prerequisites
-- Node.js installed
+## 📌 Overview
 
-### Environment Variables
-1. Create a `.env` in the root (for React):
-```
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
+This project was developed as part of an academic DBMS initiative with the goal of exploring how backend systems work beyond traditional command-line outputs.
 
-2. Create a `.env` in the `backend` folder (for the Server Endpoint):
-```
-SUPABASE_URL=your_supabase_url
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
-PORT=3001
-```
+We were curious about:
+- How frontend connects to backend
+- How databases handle secure transactions
+- How blockchain concepts can be simulated in DBMS
 
-### Installation
-1. Install dependencies:
+So we built a **Blockchain Audit System** with a **real dashboard interface**.
+
+---
+
+## 🚀 Features
+
+- 🔐 **Tamper-proof audit logs**
+- 🔗 **Blockchain-like structure using hash chaining**
+- 💰 **Wallet-based transaction system**
+- 📊 **Interactive dashboard UI**
+- ⚡ **Real-time transaction updates**
+- 🛡️ **Trigger-based protection against unauthorized modifications**
+
+---
+
+## 🧠 Core Concepts Used
+
+### 🗄️ DBMS
+- Tables: `wallets`, `transactions`, `audit_blocks`
+- Triggers & Functions (PL/pgSQL)
+- Data integrity constraints
+- Transaction management
+
+### 🔗 Blockchain Concepts
+- Hash chaining between blocks
+- Immutable audit trail
+- Block verification system
+
+### 🌐 Full Stack Integration
+- Backend connected to frontend dashboard
+- API-based communication
+- Deployment using Vercel
+
+---
+
+## 🏗️ System Architecture
+
+---
+
+## 🧾 Database Schema
+
+### Wallets Table
+- Stores user balances
+
+### Transactions Table
+- Records money transfers
+
+### Audit Blocks Table
+- Stores hashed transaction logs
+- Links each block to previous block (chain)
+
+---
+
+## ⚙️ Key Functions
+
+### 🔁 `transfer_funds()`
+- Transfers money between wallets
+- Automatically logs transaction
+- Creates audit block
+
+### ⛓️ `insert_audit_block()`
+- Generates hash
+- Links with previous block
+- Stores immutable record
+
+### 🔍 `verify_audit_chain()`
+- Checks integrity of entire blockchain
+- Detects tampering
+
+---
+
+## 🛡️ Security Features
+
+- ❌ Direct modification of critical tables restricted
+- ⚠️ Triggers block unauthorized updates
+- 🔐 Audit chain ensures data cannot be altered silently
+
+---
+
+## 💡 What We Learned
+
+- How backend systems actually work beyond theory
+- Real-world use of DBMS triggers and functions
+- Integrating frontend with backend systems
+- Practical implementation of blockchain concepts without crypto
+
+---
+
+## 🎯 Motivation
+
+This project was not just for grades.
+
+We built it because:
+> We wanted to understand how real systems work — not just print outputs on a terminal.
+
+---
+
+## 🧑‍💻 Tech Stack
+
+- PostgreSQL (DBMS)
+- PL/pgSQL (Functions & Triggers)
+- JavaScript (Frontend)
+- Vercel (Deployment)
+
+---
+
+## 📸 Screenshots
+
+_Add your dashboard screenshots here_
+
+---
+
+## 🔧 How to Run Locally
+
+1. Clone the repo
 ```bash
-npm install
-```
-
-### Running the App
-1. Start the React frontend:
-```bash
-npm run dev
-```
-
-2. Start the Backend API mock server (in a new terminal):
-```bash
-cd backend
-node server.js
-```
-
-### Usage
-- Visit `http://localhost:5173` to view the Dashboard.
-- You can bypass auth and test the `Dashboard` and `Settings` directly via the URL.
-- To create a transaction, the React app will `POST` to `http://localhost:3001/api/log`. The backend securely inserts the payload using Supabase RPC and the Service Role key.
-
-## Viva Notes (Q&A)
-
-**Q: Why use a separate backend server for writing blocks?**
-A: To write blocks safely, you must use the `SERVICE_ROLE_KEY` to prevent unauthorized client-side insertions. Clients should only use the `ANON_KEY` to read data. The backend serves as a proxy, verifying the transaction logic before writing.
-
-**Q: How does the chain verify itself?**
-A: Every new block hashed incorporates the `block_hash` of the previous block. The Supabase RPC `verify_audit_chain` continuously re-hashes the payload and `prev_hash` to match the expected `block_hash` stored in the row. If someone alters the payload, the hashes mismatch, indicating a violation.
-
-**Q: How is performance handled for long chains?**
-A: For visualization and the block explorer, pagination (`LIMIT`/`OFFSET`) and querying only the most recent blocks prevent loading massive payloads. Verification can also be optimized by verifying segments or comparing periodic 'anchors' instead of recounting from Genesis on every client load.
+git clone https://github.com/your-username/your-repo-name.git
+-- create tables
+-- create functions
+-- setup triggers
