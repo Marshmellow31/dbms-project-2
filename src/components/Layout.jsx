@@ -23,10 +23,6 @@ export function Layout() {
     { text: 'Fraud Detection', icon: <ShieldAlert size={20} />, path: '/fraud' },
   ];
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate('/');
-  };
 
   const drawer = (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -68,16 +64,7 @@ export function Layout() {
           )
         })}
       </List>
-      <Box sx={{ p: 2, borderTop: '1px solid var(--muted-surface)' }}>
-        <ListItem 
-          button="true"
-          onClick={handleLogout}
-          sx={{ borderRadius: 2, color: 'var(--text-muted)', '&:hover': { color: 'var(--text-main)', bgcolor: 'rgba(255,255,255,0.05)' } }}
-        >
-          <ListItemIcon sx={{ color: 'inherit', minWidth: 40 }}><LogOut size={20} /></ListItemIcon>
-          <ListItemText primary="Logout" primaryTypographyProps={{ fontWeight: 500, fontSize: 14 }} />
-        </ListItem>
-      </Box>
+
     </Box>
   );
 
@@ -162,10 +149,7 @@ export function Layout() {
               <Typography variant="caption" sx={{ color: 'var(--success)', fontWeight: 600 }}>Mainnet Active</Typography>
             </Box>
             
-            {/* Profile Menu Placeholder */}
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: '50%', bgcolor: 'rgba(255,255,255,0.05)', cursor: 'pointer', '&:hover': { bgcolor: 'rgba(255,255,255,0.1)' } }}>
-              <User size={20} color="var(--text-main)" />
-            </Box>
+
           </Stack>
         </Box>
 
