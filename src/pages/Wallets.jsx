@@ -34,7 +34,20 @@ export function Wallets() {
     }
     setSubmitting(true);
     try {
+      // 1. Fetch the last wallet id
+      const { data: lastWallet, error: fetchError } = await supabase
+        .from('wallets')
+        .select('id')
+        .order('id', { ascending: false })
+        .limit(1);
+
+      if (fetchError) throw fetchError;
+      
+      const nextId = lastWallet && lastWallet.length > 0 ? parseInt(lastWallet[0].id) + 1 : 1;
+
+      // 2. Add the new wallet 
       const { error } = await supabase.rpc('create_wallet', {
+        p_id: nextId,
         p_name: name,
         p_balance: parseFloat(balance) || 0,
         p_password: password,
