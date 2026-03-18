@@ -14,6 +14,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from the Vite build
+app.use(express.static(path.join(__dirname, '../dist')));
+
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -60,6 +63,11 @@ app.post('/api/log', async (req, res) => {
     console.error('Internal Server Error:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
+});
+
+// Fallback for React Router
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 const PORT = process.env.PORT || 3001;
