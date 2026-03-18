@@ -28,6 +28,10 @@ export function Wallets() {
 
   const handleCreateWallet = async (e) => {
     e.preventDefault();
+    if (password !== 'dbms') {
+      setToast({ variant: 'error', message: 'Unauthorized: Incorrect password' });
+      return;
+    }
     setSubmitting(true);
     try {
       const { error } = await supabase.rpc('create_wallet', {
